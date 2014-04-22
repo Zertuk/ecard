@@ -23,16 +23,15 @@
 
 // }
 
-// var computerPickCard = function() {
-// 	var pick = Math.round(Math.random()*4);
-// 	if (pick <4) {
-// 		return 'Citizen';
-// 	}
-// 	else {
-// 		return 'Emperor';
-// 	}
-
-// }
+var computerPickCard = function() {
+	var pick = Math.round(Math.random()*4);
+ 	if (pick <4) {
+ 		return 'Citizen';
+ 	}
+ 	else {
+ 		return 'Emperor';
+ 	}
+}
 
 // var round = function() {
 // 	var compPick = computerPickCard();
@@ -43,27 +42,38 @@
 // else pick = 1 and citizen beats slave
 
 
+
 var whoWins = function() {
 	var pick1 = 'Slave';
-	var pick2 = 'Citizen';
-	switch (pick1, pick2) {
-		case pick1 == 'Emperor': 
+	var pick2 = computerPickCard();
+	console.log(pick2);
+	var winner;
+	switch (pick1) {
+		case 'Emperor': 
 			if (pick2 == 'Slave') {
-				return 1;
+				winner = 2;
+				break;
 			}
-			return 2;			
+			winner = 1;
+			break;
+						
 
-		case pick1 == 'Slave': 
+		case 'Slave': 
 			if (pick2 == 'Emperor') {
-				return 3;
+				winner = 1;
+				break;
 			}
-			return 4;			
-		case pick1 == 'Citizen':
+			winner = 2;
+			break;		
+		case 'Citizen':
 			if (pick2 == 'Emperor') {
-				return 5;
+				winner = 2;
+				break;
 			}
-			return 6;
-			
-	}
-	console.log(whoWins());
+			winner = 1;
+			break;			
+		}
+	return winner;
 }
+
+console.log(whoWins());
