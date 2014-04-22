@@ -1,5 +1,5 @@
-// var playerTotal = 0;
-// var computerTotal = 0;
+var playerTotal = 0;
+var computerTotal = 0;
 
 // var makeHand = function() {
 // 	if (slave == false) {
@@ -21,7 +21,12 @@
 
 // var pickCard = function() {
 
-// }
+// }'
+var playNow = document.getElementById('play');
+
+playNow.addEventListener('click', function() {
+	whoWins();
+})
 
 var computerPickCard = function() {
 	var pick = Math.round(Math.random()*4);
@@ -34,7 +39,8 @@ var computerPickCard = function() {
 }
 
 // var round = function() {
-// 	var compPick = computerPickCard();
+
+// }
 
 // idea: emperor = 1, citizen = 2 slave = -1,
 // if pick = 0 then slave and emp so slave wins 
@@ -52,25 +58,31 @@ var whoWins = function() {
 		case 'Emperor': 
 			if (pick2 == 'Slave') {
 				winner = 2;
+				computerTotal++;
 				break;
 			}
 			winner = 1;
+			PlayerTotal++;
 			break;
 						
 
 		case 'Slave': 
 			if (pick2 == 'Emperor') {
 				winner = 1;
+				PlayerTotal++;
 				break;
 			}
 			winner = 2;
+			computerTotal++;
 			break;		
 		case 'Citizen':
 			if (pick2 == 'Emperor') {
 				winner = 2;
+				computerTotal++;
 				break;
 			}
 			winner = 1;
+			PlayerTotal++;
 			break;			
 		}
 	return winner;

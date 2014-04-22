@@ -1,0 +1,15 @@
+#play {
+	text-align: center;
+	width: 150px;
+	padding: 5px;
+	background-color: black;
+	color: white;
+	font-size: 20px;
+	margin: 0 auto;
+}
+
+#play:active {
+	background-color: red;	
+
+
+}
