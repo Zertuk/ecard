@@ -37,11 +37,11 @@
 // var round = function() {
 // 	var compPick = computerPickCard();
 
-idea: emperor = 1, citizen = 2 slave = -1,
-if pick = 0 then slave and emp so slave wins 
-if pick = 3 then emperor beats citizen
-else pick = 1 and citizen beats slave
-	
+// idea: emperor = 1, citizen = 2 slave = -1,
+// if pick = 0 then slave and emp so slave wins 
+// if pick = 3 then emperor beats citizen
+// else pick = 1 and citizen beats slave
+
 
 var whoWins = function() {
 	var pick1 = 'Slave';
@@ -50,27 +50,20 @@ var whoWins = function() {
 		case pick1 == 'Emperor': 
 			if (pick2 == 'Slave') {
 				return 1;
+			}
+			return 2;			
 
-			}
-			else {
-				return 2;
-			}
-			break;
 		case pick1 == 'Slave': 
 			if (pick2 == 'Emperor') {
 				return 3;
 			}
-			else {
-				return 4;
-			}
-			break;
+			return 4;			
 		case pick1 == 'Citizen':
 			if (pick2 == 'Emperor') {
 				return 5;
 			}
-			else {
-				return 6;
-			}
+			return 6;
+			
 	}
 	console.log(whoWins());
 }
