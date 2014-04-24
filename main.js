@@ -18,10 +18,15 @@ else {
 	emperorCard.style.display = 'inline';
 }	
 
-
 var whoWins = function() {
 	// var playerDeck = makeHand();
 	// var pick1 = playerDeck[0];
+	i = 0;
+	if (pick1 == 'citizen') {
+		citizenCards[i].style.display = 'none';
+		i++;
+		console.log(i);
+	}
 	console.log(pick1);
 	var pick2 = computerPickCard();
 	console.log(pick2);
@@ -29,41 +34,40 @@ var whoWins = function() {
 	switch (pick1) {
 		case 'emperor': 
 			if (pick2 == 'slave') {
-				winner = 2;
+				winner = 'computer wins this round';
 				computerTotal++;
 				break;
 			}
-			winner = 1;
+			winner = 'you win this round';
 			playerTotal++;
 			break;
 						
 
 		case 'slave': 
 			if (pick2 == 'emperor') {
-				winner = 1;
+				winner = 'you win this round';
 				playerTotal++;
 				break;
 			}
-			winner = 2;
+			winner = 'computer wins this round';
 			computerTotal++;
 			break;		
 		case 'citizen':
 			if (pick2 == 'emperor') {
-				winner = 2;
+				winner = 'computer wins this round';
 				computerTotal++;
 				break;
 			}
 			else if (pick1 == pick2) {
-				winner = 0;
+				winner = 'tie, play another card';
 				break;
 			}
-			winner = 1;
+			winner = 'you win this round';
 			playerTotal++;
 			break;			
 		}
 	return winner;
 }
-
 
 play.addEventListener('click', function() {
 	console.log(whoWins());
@@ -71,13 +75,22 @@ play.addEventListener('click', function() {
 
 slaveCard.addEventListener('click', function() {
 	pick1 = 'slave';
-	slaveCard.style.border = '3px solid orange';
+	this.style.border = '3px solid orange';
+	this.style.width = '200px';
+})
+
+emperorCard.addEventListener('click', function() {
+	pick1 = 'emperor';
+	this.style.border = '3px solid orange';
+	this.style.width = '200px';
+
 })
 
 for (var i = 0; i < citizenCards.length; i++) {
 	citizenCards[i].addEventListener('click', function() {
 		pick1 = 'citizen';
 		this.style.border = '3px solid orange';
+		this.style.width = '200px';
 	})
 }
 
@@ -89,7 +102,7 @@ var makeHand = function() {
  		var deck = new Array('slave', 'citizen', 'citizen', 'citizen', 'citizen');
  	}
  	return deck;
-}
+	}
 }
 
 // var pickCard = function() {
