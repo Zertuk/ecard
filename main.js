@@ -10,6 +10,7 @@ var emperorCard = document.getElementById('emperor');
 var play = document.getElementById('play');
 var gameWrapper = document.getElementById('gameWrapper');
 var endGameText = document.getElementById('endGameText');
+var pick1;
 
 var slaveOrEmperor = function() {
 	if (slave == true) {
@@ -47,7 +48,10 @@ var whichRound = function() {
 var whoWins = function() {
 	// var playerDeck = makeHand();
 	// var pick1 = playerDeck[0];
-	
+	if (pick1 == undefined) {
+		console.log('pick a card');
+		return;
+	}
 	if (pick1 == 'citizen') {
 		citizenCards[count].style.display = 'none';
 		count++;
@@ -136,6 +140,26 @@ for (var i = 0; i < citizenCards.length; i++) {
 	})
 }
 
+//chooses computer card and deck based off of slave value
+var computerPickCard2 = function() {	
+	compDeck = new Array();
+	var pick = Math.round(Math.random()*4);
+	if (slave == true) {
+		compDeck = ['emperor', 'citizen', 'citizen', 'citizen', 'citizen'];
+		pick2 = compDeck[pick];
+		console.log(pick2);
+		return pick2;
+	}
+	else {
+		compDeck = ['slave', 'citizen', 'citizen', 'citizen', 'citizen'];
+		pick2 = compDeck[pick];
+		console.log([pick2]);
+		return pick2;
+	}
+}
+
+computerPickCard2();
+
 
 //makes hand with 4 citizens and either slave or emperor depending on the boolean value of slave
 var makeHand = function() {
@@ -190,6 +214,7 @@ var gameEnd = function() {
 // var pickCard = function() {
 
 // }'
+
 
 
 

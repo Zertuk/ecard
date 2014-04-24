@@ -1,3 +1,7 @@
+body {
+	max-width: 100%;
+}
+
 #play {
 	text-align: center;
 	width: 150px;
@@ -31,6 +35,10 @@ img {
 
 #endGameText p {
 	font-size: 32px;
+}
+
+#gameWrapper {
+	margin: 0 auto;
 }
 
 p {
