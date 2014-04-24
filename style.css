@@ -9,7 +9,17 @@
 }
 
 #play:active {
-	background-color: red;	
+	background-color: red;
+}
 
+img {
+	max-width: 150px;
+}
 
+#slave {
+	display: none;
+}
+
+#emperor {
+	display: none;
 }
