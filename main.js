@@ -8,7 +8,8 @@ var slaveCard = document.getElementById('slave');
 var citizenCards = document.getElementsByClassName('citizen');
 var emperorCard = document.getElementById('emperor');
 var play = document.getElementById('play');
-
+var gameWrapper = document.getElementById('gameWrapper');
+var endGameText = document.getElementById('endGameText');
 
 var slaveOrEmperor = function() {
 	if (slave == true) {
@@ -32,6 +33,9 @@ var whichRound = function() {
 		slave = false;
 		return slave;
 	}
+	else if (roundNumber > 12) {
+		gameEnd();
+	} 
 	else {
 		slave = true;
 		return slave;
@@ -154,6 +158,13 @@ var makeHand = function() {
  	return;
 	}
 }
+
+var gameEnd = function() {
+	gameWrapper.style.display = 'none';
+	endGameText.style.display = 'inline';
+}
+
+
 
 
 
