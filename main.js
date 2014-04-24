@@ -21,6 +21,7 @@ var slaveOrEmperor = function() {
 	}
 }
 
+//changes value of slave based on round, 1-3 & 7-9 emperor, 4-6 & 10-12 slave
 var whichRound = function() {
 	if (roundNumber < 4) {
 		slave = false;
@@ -33,6 +34,8 @@ var whichRound = function() {
 	}	
 }	
 
+
+//decides who wins based on which cards are picked, removes citizen cards played, resets hand with makeHand() on w/l
 var whoWins = function() {
 	// var playerDeck = makeHand();
 	// var pick1 = playerDeck[0];
@@ -93,6 +96,8 @@ var whoWins = function() {
 slaveOrEmperor();
 whichRound();
 
+
+//event listeners for play button, and picking the cards
 play.addEventListener('click', function() {
 	console.log(whoWins());
 })
@@ -107,7 +112,6 @@ emperorCard.addEventListener('click', function() {
 	pick1 = 'emperor';
 	this.style.border = '3px solid orange';
 	this.style.width = '200px';
-
 })
 
 for (var i = 0; i < citizenCards.length; i++) {
@@ -118,6 +122,8 @@ for (var i = 0; i < citizenCards.length; i++) {
 	})
 }
 
+
+//makes hand with 4 citizens and either slave or emperor depending on the boolean value of slave
 var makeHand = function() {
  	if (slave == true) {
  		slaveCard.style.display = 'inline';
@@ -131,9 +137,14 @@ var makeHand = function() {
  			citizenCards[i].style.display = 'inline';
  		}
  	}
- 	return deck;
+ 	return;
 	}
 }
+
+
+
+
+//from here on is temp stuff/in progress stuff
 
 // var pickCard = function() {
 // 	var newDeck = makeHand();
