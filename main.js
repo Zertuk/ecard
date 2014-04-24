@@ -5,7 +5,19 @@ var computerTotal = 0;
 var slave = true;
 var slaveCard = document.getElementById('slave');
 var citizenCards = document.getElementsByClassName('citizen');
+var emperorCard = document.getElementById('emperor');
 var play = document.getElementById('play');
+
+if (slave == true) {
+	slaveCard.style.display = 'inline';
+	emperorCard.style.display = 'none';
+}
+
+else {
+	slaveCard.style.display = 'none';
+	emperorCard.style.display = 'inline';
+}	
+
 
 var whoWins = function() {
 	// var playerDeck = makeHand();
@@ -41,6 +53,10 @@ var whoWins = function() {
 				computerTotal++;
 				break;
 			}
+			else if (pick1 == pick2) {
+				winner = 0;
+				break;
+			}
 			winner = 1;
 			playerTotal++;
 			break;			
@@ -55,11 +71,13 @@ play.addEventListener('click', function() {
 
 slaveCard.addEventListener('click', function() {
 	pick1 = 'slave';
+	slaveCard.style.border = '3px solid orange';
 })
 
 for (var i = 0; i < citizenCards.length; i++) {
 	citizenCards[i].addEventListener('click', function() {
 		pick1 = 'citizen';
+		this.style.border = '3px solid orange';
 	})
 }
 
