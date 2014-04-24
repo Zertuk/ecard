@@ -2,30 +2,45 @@ window.onload = function() {
 
 var playerTotal = 0;
 var computerTotal = 0;
-var slave = true;
+var count = 0;
+var roundNumber = 0;
 var slaveCard = document.getElementById('slave');
 var citizenCards = document.getElementsByClassName('citizen');
 var emperorCard = document.getElementById('emperor');
 var play = document.getElementById('play');
 
-if (slave == true) {
-	slaveCard.style.display = 'inline';
-	emperorCard.style.display = 'none';
+
+var slaveOrEmperor = function() {
+	if (slave == true) {
+		slaveCard.style.display = 'inline';
+		emperorCard.style.display = 'none';
+	}
+	else {
+		slaveCard.style.display = 'none';
+		emperorCard.style.display = 'inline';
+	}
 }
 
-else {
-	slaveCard.style.display = 'none';
-	emperorCard.style.display = 'inline';
+var whichRound = function() {
+	if (roundNumber < 4) {
+		slave = false;
+	}
+	else if (6 < roundNumber < 10) {
+		slave = false;
+	}
+	else {
+		slave = true;
+	}	
 }	
 
 var whoWins = function() {
 	// var playerDeck = makeHand();
 	// var pick1 = playerDeck[0];
-	i = 0;
+	
 	if (pick1 == 'citizen') {
-		citizenCards[i].style.display = 'none';
-		i++;
-		console.log(i);
+		citizenCards[count].style.display = 'none';
+		count++;
+		console.log(count);
 	}
 	console.log(pick1);
 	var pick2 = computerPickCard();
@@ -36,10 +51,12 @@ var whoWins = function() {
 			if (pick2 == 'slave') {
 				winner = 'computer wins this round';
 				computerTotal++;
+				makeHand();
 				break;
 			}
 			winner = 'you win this round';
 			playerTotal++;
+			makeHand();
 			break;
 						
 
@@ -47,15 +64,18 @@ var whoWins = function() {
 			if (pick2 == 'emperor') {
 				winner = 'you win this round';
 				playerTotal++;
+				makeHand();
 				break;
 			}
 			winner = 'computer wins this round';
 			computerTotal++;
+			makeHand();
 			break;		
 		case 'citizen':
 			if (pick2 == 'emperor') {
 				winner = 'computer wins this round';
 				computerTotal++;
+				makeHand();
 				break;
 			}
 			else if (pick1 == pick2) {
@@ -64,10 +84,14 @@ var whoWins = function() {
 			}
 			winner = 'you win this round';
 			playerTotal++;
+			makeHand();
 			break;			
 		}
 	return winner;
 }
+
+slaveOrEmperor();
+whichRound();
 
 play.addEventListener('click', function() {
 	console.log(whoWins());
@@ -95,11 +119,17 @@ for (var i = 0; i < citizenCards.length; i++) {
 }
 
 var makeHand = function() {
- 	if (slave == false) {
- 		var deck = new Array('emperor', 'citizen', 'citizen', 'citizen', 'citizen');
+ 	if (slave == true) {
+ 		slaveCard.style.display = 'inline';
+ 		for (var i = 0; i < citizenCards.length; i++) {
+ 			citizenCards[i].style.display = 'inline';
+ 		}
  	}
  	else {
- 		var deck = new Array('slave', 'citizen', 'citizen', 'citizen', 'citizen');
+ 		emperorCard.style.display = 'inline';
+ 		for (var i = 0; i < citizenCards.length; i++) {
+ 			citizenCards[i].style.display = 'inline';
+ 		}
  	}
  	return deck;
 	}
