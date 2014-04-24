@@ -6,14 +6,20 @@
 	<title>E Card</title>
 
 	<link href = "style.css" rel = "stylesheet">
-	<link href='http://fonts.googleapis.com/css?family=Titillium+Web' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Maven+Pro' rel='stylesheet' type='text/css'>
 
 	<script src = "main.js"></script>
 
 </head>
 
 <body>
-
+<div id = "introScreen">
+	<p>Each player has 5 cards, 4 Citizens and either Slave or Emperor.</p>
+	<p>The Citizen card represents the common man, and cannot defeat the Emperor who sits at the top. It can, however, defeat the Slave, who resides at the very bottom of the system. Two citizen against each other results in a tie.</p>
+	<p>The Emperor represents the one at the top of society. This card can defeat the citizen, but will lose to the Slave.</p>
+	<p>The Slave is presented as the one at the very bottom of society. Seeing as how it has nothing to lose, it can overthrow the Emperor in one last attempt at revenge.</p>
+</div>
+<div id = "gameWrapper">
 	<div id = "play">Play</div>
 	<div id = "cards">
 		<img src = "img/slave.png" id = "slave">
@@ -22,6 +28,11 @@
 		<img src = "img/citizen.png" class = "citizen">
 		<img src = "img/citizen.png" class = "citizen">
 		<img src = "img/citizen.png" class = "citizen">
+	</div>
+</div><!--gameWrapper-->
+	<div id = "endGameText">
+		<p>The Game is Over</p>
+		<p id = "endStats"></p>
 	</div>
 	
 </body>
