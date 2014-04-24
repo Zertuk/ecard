@@ -3,7 +3,7 @@ window.onload = function() {
 var playerTotal = 0;
 var computerTotal = 0;
 var count = 0;
-var roundNumber = 0;
+var roundNumber = 1;
 var slaveCard = document.getElementById('slave');
 var citizenCards = document.getElementsByClassName('citizen');
 var emperorCard = document.getElementById('emperor');
@@ -23,15 +23,14 @@ var slaveOrEmperor = function() {
 
 //changes value of slave based on round, 1-3 & 7-9 emperor, 4-6 & 10-12 slave
 var whichRound = function() {
-	if (roundNumber < 4) {
+	console.log(roundNumber);
+	if ((roundNumber < 4) || (6 < roundNumber < 10)) {
 		slave = false;
+		return slave;
 	}
-	else if (6 < roundNumber < 10) {
-		slave = false;
-	}
-	else {
 		slave = true;
-	}	
+		return slave;
+	
 }	
 
 
@@ -54,11 +53,13 @@ var whoWins = function() {
 			if (pick2 == 'slave') {
 				winner = 'computer wins this round';
 				computerTotal++;
+				roundNumber++;
 				makeHand();
 				break;
 			}
 			winner = 'you win this round';
 			playerTotal++;
+			roundNumber++;
 			makeHand();
 			break;
 						
@@ -67,17 +68,20 @@ var whoWins = function() {
 			if (pick2 == 'emperor') {
 				winner = 'you win this round';
 				playerTotal++;
+				roundNumber++;
 				makeHand();
 				break;
 			}
 			winner = 'computer wins this round';
 			computerTotal++;
+			roundNumber++;
 			makeHand();
 			break;		
 		case 'citizen':
 			if (pick2 == 'emperor') {
 				winner = 'computer wins this round';
 				computerTotal++;
+				roundNumber++;
 				makeHand();
 				break;
 			}
@@ -86,6 +90,7 @@ var whoWins = function() {
 				break;
 			}
 			winner = 'you win this round';
+			roundNumber++;
 			playerTotal++;
 			makeHand();
 			break;			
@@ -125,6 +130,10 @@ for (var i = 0; i < citizenCards.length; i++) {
 
 //makes hand with 4 citizens and either slave or emperor depending on the boolean value of slave
 var makeHand = function() {
+	whichRound();
+	slaveOrEmperor();
+	console.log(slave);
+	count = 0;
  	if (slave == true) {
  		slaveCard.style.display = 'inline';
  		for (var i = 0; i < citizenCards.length; i++) {
