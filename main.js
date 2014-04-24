@@ -57,10 +57,11 @@ slaveCard.addEventListener('click', function() {
 	pick1 = 'slave';
 })
 
-citizenCards.addEventListener('click', function() {
-	var pick1 = 'citizen';
-})
-
+for (var i = 0; i < citizenCards.length; i++) {
+	citizenCards[i].addEventListener('click', function() {
+		pick1 = 'citizen';
+	})
+}
 
 var makeHand = function() {
  	if (slave == false) {
