@@ -24,13 +24,18 @@ var slaveOrEmperor = function() {
 //changes value of slave based on round, 1-3 & 7-9 emperor, 4-6 & 10-12 slave
 var whichRound = function() {
 	console.log(roundNumber);
-	if ((roundNumber < 4) || (6 < roundNumber < 10)) {
+	if ((roundNumber < 4)) {
 		slave = false;
 		return slave;
 	}
+	else if ((roundNumber > 6) && (10 > roundNumber)) {
+		slave = false;
+		return slave;
+	}
+	else {
 		slave = true;
 		return slave;
-	
+	}
 }	
 
 
