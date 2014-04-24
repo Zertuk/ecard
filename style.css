@@ -13,7 +13,8 @@
 }
 
 img {
-	max-width: 150px;
+	width: 150px;
+	margin-top: 50px;
 }
 
 #slave {
