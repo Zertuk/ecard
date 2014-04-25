@@ -14,6 +14,7 @@ var pick1;
 var compDeck;
 var count = 0;
 
+//decides whether to show the emperor or slave card
 var slaveOrEmperor = function() {
 	if (slave == true) {
 		slaveCard.style.display = 'inline';
@@ -148,6 +149,7 @@ for (var i = 0; i < citizenCards.length; i++) {
 }
 
 
+//makes the computers deck depending on if they are the emp or slave
 var computerDeck = function() {
 	compDeck = new Array(5);
 	if (slave == true) {
@@ -193,63 +195,13 @@ var makeHand = function() {
 	}
 }
 
+	//displays end of game screen and removes game
 var gameEnd = function() {
 	gameWrapper.style.display = 'none';
 	endGameText.style.display = 'inline';
 }
 
 
-
-
-
-
-//from here on is temp stuff/in progress stuff
-
-// var pickCard = function() {
-// 	var newDeck = makeHand();
-// 	console.log(newDeck);
-// }
-
-// pickCard();
-
-// console.log(Math.round(Math.random()*4));
-
-//var firstRound = function() {
-//	slave == false;
-// 	player.makeHand();
-//  slave == true;
-// 	computer.makeHand();
-//}
-
-// var pickCard = function() {
-
-// }'
-
-// var cards = get.ElementByTagName('cards');
-// cards.addEventListener('click', function() {
-// 	var emperor = document.getElementById('emperor');
-// 	var citizen = document.getElementById('citizen');
-// 	var slave = document.getElementById('slave');
-// 	if (slave == true) {
-// 		playerCard = 'slave';
-// 	}
-// 	else if (citizen == true) {
-// 		playerCard = 'citizen';
-// 	}
-// 	else {
-// 		playerCard = 'emperor'
-// 	}
-// }
-
-// }
-// var round = function() {
-
-// }
-
-// idea: emperor = 1, citizen = 2 slave = -1,
-// if pick = 0 then slave and emp so slave wins 
-// if pick = 3 then emperor beats citizen
-// else pick = 1 and citizen beats slave
 
 
 
