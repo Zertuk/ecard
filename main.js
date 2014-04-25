@@ -2,7 +2,6 @@ window.onload = function() {
 
 var playerTotal = 0;
 var computerTotal = 0;
-var count = 0;
 var roundNumber = 1;
 var slaveCard = document.getElementById('slave');
 var citizenCards = document.getElementsByClassName('citizen');
@@ -10,7 +9,10 @@ var emperorCard = document.getElementById('emperor');
 var play = document.getElementById('play');
 var gameWrapper = document.getElementById('gameWrapper');
 var endGameText = document.getElementById('endGameText');
+var gameText = document.getElementById('gameText');
 var pick1;
+var compDeck;
+var count = 0;
 
 var slaveOrEmperor = function() {
 	if (slave == true) {
@@ -25,7 +27,6 @@ var slaveOrEmperor = function() {
 
 //changes value of slave based on round, 1-3 & 7-9 emperor, 4-6 & 10-12 slave
 var whichRound = function() {
-	console.log(roundNumber);
 	if ((roundNumber < 4)) {
 		slave = false;
 		return slave;
@@ -46,11 +47,10 @@ var whichRound = function() {
 
 //decides who wins based on which cards are picked, removes citizen cards played, resets hand with makeHand() on w/l
 var whoWins = function() {
-	// var playerDeck = makeHand();
+	makeHand();
 	// var pick1 = playerDeck[0];
 	if (pick1 == undefined) {
 		console.log('pick a card');
-		return;
 	}
 	if (pick1 == 'citizen') {
 		citizenCards[count].style.display = 'none';
@@ -58,12 +58,13 @@ var whoWins = function() {
 		console.log(count);
 	}
 	console.log(pick1);
-	var pick2 = computerPickCard();
+	computerPickCard();
 	console.log(pick2);
 	var winner;
 	switch (pick1) {
 		case 'emperor': 
 			if (pick2 == 'slave') {
+				gameText.innerHTML ='computer wins this round';
 				winner = 'computer wins this round';
 				computerTotal++;
 				roundNumber++;
@@ -71,6 +72,7 @@ var whoWins = function() {
 				break;
 			}
 			winner = 'you win this round';
+			gameText.innerHTML = 'you win this round';
 			playerTotal++;
 			roundNumber++;
 			makeHand();
@@ -80,12 +82,14 @@ var whoWins = function() {
 		case 'slave': 
 			if (pick2 == 'emperor') {
 				winner = 'you win this round';
+				gameText.innerHTML = 'you win this round';
 				playerTotal++;
 				roundNumber++;
 				makeHand();
 				break;
 			}
 			winner = 'computer wins this round';
+			gameText.innerHTML = 'computer wins this round';
 			computerTotal++;
 			roundNumber++;
 			makeHand();
@@ -93,6 +97,7 @@ var whoWins = function() {
 		case 'citizen':
 			if (pick2 == 'emperor') {
 				winner = 'computer wins this round';
+				gameText.innerHTML = 'computer wins this round';
 				computerTotal++;
 				roundNumber++;
 				makeHand();
@@ -100,9 +105,11 @@ var whoWins = function() {
 			}
 			else if (pick1 == pick2) {
 				winner = 'tie, play another card';
+				gameText.innerHTML = 'tie, play another card';
 				break;
 			}
 			winner = 'you win this round';
+			gameText.innerHTML = 'you win this round';
 			roundNumber++;
 			playerTotal++;
 			makeHand();
@@ -140,32 +147,35 @@ for (var i = 0; i < citizenCards.length; i++) {
 	})
 }
 
-//chooses computer card and deck based off of slave value
-var computerPickCard2 = function() {	
-	compDeck = new Array();
-	var pick = Math.round(Math.random()*4);
+
+var computerDeck = function() {
+	compDeck = new Array(5);
 	if (slave == true) {
 		compDeck = ['emperor', 'citizen', 'citizen', 'citizen', 'citizen'];
-		pick2 = compDeck[pick];
-		console.log(pick2);
-		return pick2;
+		return compDeck;
 	}
 	else {
 		compDeck = ['slave', 'citizen', 'citizen', 'citizen', 'citizen'];
-		pick2 = compDeck[pick];
-		console.log([pick2]);
-		return pick2;
+		return compDeck;
 	}
 }
 
-computerPickCard2();
+//chooses computer card and deck based off of slave value
+var computerPickCard = function() {	
+	var pick = Math.round(Math.random()*4);
+	pick2 = compDeck[pick];
+	delete compDeck[pick];
+	console.log(compDeck);
+	console.log(pick2);
+	return pick2;
+}
 
 
 //makes hand with 4 citizens and either slave or emperor depending on the boolean value of slave
 var makeHand = function() {
 	whichRound();
 	slaveOrEmperor();
-	console.log(slave);
+	computerDeck();
 	count = 0;
  	if (slave == true) {
  		slaveCard.style.display = 'inline';
@@ -214,22 +224,6 @@ var gameEnd = function() {
 // var pickCard = function() {
 
 // }'
-
-
-
-
-
-
-var computerPickCard = function() {
-	var pick = Math.round(Math.random()*4);
- 	if (pick < 4) {
- 		return 'citizen';
- 	}
- 	else {
- 		return 'emperor';
- 	}
-}
-
 
 // var cards = get.ElementByTagName('cards');
 // cards.addEventListener('click', function() {
