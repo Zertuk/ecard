@@ -1,5 +1,6 @@
 window.onload = function() {
 
+//init all global variables
 var playerTotal = 0;
 var computerTotal = 0;
 var roundNumber = 1;
@@ -118,6 +119,7 @@ var whoWins = function() {
 			gameText.innerHTML = 'computer plays ' + pick2 + ', tie, play another card...';
 			break;			
 		}
+	resetStyles();
 	return;
 }
 
@@ -129,17 +131,21 @@ play.addEventListener('click', function() {
 slaveCard.addEventListener('click', function() {
 	pick1 = 'slave';
 	this.style.border = '3px solid orange';
+	this.style.width = '175px';
 })
 
 emperorCard.addEventListener('click', function() {
 	pick1 = 'emperor';
 	this.style.border = '3px solid orange';
+	this.style.width = '175px';
+
 })
 
 for (var i = 0; i < citizenCards.length; i++) {
 	citizenCards[i].addEventListener('click', function() {
 		pick1 = 'citizen';
 		this.style.border = '3px solid orange';
+		this.style.width = '175px';
 	})
 }
 
@@ -155,6 +161,18 @@ rules.addEventListener('click', function() {
 		hide = true;
 	}
 })
+
+//resets the style of the cards after they are played
+var resetStyles = function() {
+	slaveCard.style.border = 'none';
+	slaveCard.style.width = '150px';
+	emperorCard.style.border = 'none';
+	emperorCard.style.width = '150px';
+	for (var i = 0; i < citizenCards.length; i++) {
+		citizenCards[i].style.border = 'none';	
+		citizenCards[i].style.width = '150px';
+	}
+}
 
 
 //makes the computers deck depending on if they are the emp or slave and then shuffles the array;
@@ -181,6 +199,7 @@ var makeHand = function() {
 	computerDeck();
 	count = 0;
 	compNum = 0;
+	pick1 = null;
  	if (slave == true) {
  		slaveCard.style.display = 'inline';
  		for (var i = 0; i < citizenCards.length; i++) {
@@ -200,8 +219,14 @@ var makeHand = function() {
 
 	//displays end of game screen and removes game
 var gameEnd = function() {
-	gameWrapper.style.display = 'none';
 	endGameText.style.display = 'inline';
+	gameWrapper.style.display = 'none';
+	if (playerTotal > computerTotal) {
+		endGameText.innerHTML = 'The enemy wins with a score of ' + computerTotal;
+	}
+	else {
+		endGameText.innerHTML = 'You win with a score of ' + playerTotal;
+	}
 	}
 
 
