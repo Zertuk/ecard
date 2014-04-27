@@ -16,6 +16,11 @@ body {
 	background-color: red;
 }
 
+#endStats {
+	font-size: 26px;
+	color: red;
+}
+
 img {
 	width: 150px;
 	margin-top: 50px;
@@ -23,16 +28,13 @@ img {
 
 #slave {
 	display: none;
-	margin-left: 17px;
 }
 
 #emperor {
 	display: none;
-	margin-left: 17px;
 }
 
 #endGameText {
-	display: none;
 	text-align: center;
 }
 
@@ -46,6 +48,7 @@ img {
 }
 
 #gameWrapper {
+	text-align: center;
 	max-width: 100%;
 	margin: 0 auto;
 }
