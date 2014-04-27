@@ -58,24 +58,20 @@ var whoWins = function() {
 	}
 	console.log(pick1);
 	pick2 = compDeck[compNum];
-
-	console.log(compDeck);
-	console.log(pick2);
-	console.log(compNum);
 	compNum++;
 	var winner;
 	switch (pick1) {
 		case 'emperor': 
 			if (pick2 == 'slave') {
-				gameText.innerHTML ='computer wins this round';
-				winner = 'computer wins this round';
+				gameText.innerHTML ='computer plays ' + pick2 + ' computer wins this round';
+				winner = 'computer plays ' + pick2 + ', computer wins this round';
 				computerTotal++;
 				roundNumber++;
 				makeHand();
 				break;
 			}
-			winner = 'you win this round';
-			gameText.innerHTML = 'you win this round';
+			winner = 'computer plays ' + pick2 + ' you win this round';
+			gameText.innerHTML = 'computer plays ' + pick2 + ', you win this round';
 			playerTotal++;
 			roundNumber++;
 			makeHand();
@@ -84,47 +80,43 @@ var whoWins = function() {
 
 		case 'slave': 
 			if (pick2 == 'emperor') {
-				winner = 'you win this round';
-				gameText.innerHTML = 'you win this round';
+				winner = 'computer plays ' + pick2 + ' you win this round';
+				gameText.innerHTML = 'computer plays ' + pick2 + ', you win this round';
 				playerTotal++;
 				roundNumber++;
 				makeHand();
 				break;
 			}
-			winner = 'computer wins this round';
-			gameText.innerHTML = 'computer wins this round';
+			winner = 'computer plays ' + pick2 + ' computer wins this round';
+			gameText.innerHTML = 'computer plays ' + pick2 + ', computer wins this round';
 			computerTotal++;
 			roundNumber++;
 			makeHand();
 			break;		
 		case 'citizen':
 			if (pick2 == 'emperor') {
-				winner = 'computer wins this round';
-				gameText.innerHTML = 'computer wins this round';
+				winner = 'computer plays ' + pick2 + ', computer wins this round';
+				gameText.innerHTML = 'computer plays ' + pick2 + ', computer wins this round';
 				computerTotal++;
 				roundNumber++;
 				makeHand();
 				break;
 			}
 			else if (pick2 == 'slave') {
-				winner = 'you win this round';
-				gameText.innerHTML = 'you win this round';
+				winner = 'computer plays ' + pick2 + ', you win this round';
+				gameText.innerHTML = 'computer plays ' + pick2 + ', you win this round';
 				roundNumber++;
 				playerTotal++;
 				makeHand();
 				break;
 			}
 			
-			winner = 'tie, play another card';
-			gameText.innerHTML = 'tie, play another card';
+			winner = 'computer plays ' + pick2 + ', tie, play another card';
+			gameText.innerHTML = 'computer plays ' + pick2 + ', tie, play another card';
 			break;			
 		}
 	return winner;
 }
-
-slaveOrEmperor();
-whichRound();
-
 
 //event listeners for play button, and picking the cards
 play.addEventListener('click', function() {
@@ -199,6 +191,10 @@ var gameEnd = function() {
 	endGameText.style.display = 'inline';
 	}
 
+
+//first round init
+slaveOrEmperor();
+whichRound();
 makeHand();
 
 };
