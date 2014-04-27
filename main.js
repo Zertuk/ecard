@@ -11,10 +11,13 @@ var gameWrapper = document.getElementById('gameWrapper');
 var endGameText = document.getElementById('endGameText');
 var gameText = document.getElementById('gameText');
 var endStats = document.getElementById('endStats');
+var rules = document.getElementById('rules');
+var intro = document.getElementById('introScreen');
 var pick1;
 var compDeck;
 var count = 0;
 var compNum = 0;
+var hide = false;
 
 //decides whether to show the emperor or slave card
 var slaveOrEmperor = function() {
@@ -139,6 +142,19 @@ for (var i = 0; i < citizenCards.length; i++) {
 		this.style.border = '3px solid orange';
 	})
 }
+
+rules.addEventListener('click', function() {
+	if (hide == true) {
+		intro.style.display = 'inline';
+		rules.innerHTML = 'Hide';
+		hide = false;
+	}
+	else {
+		intro.style.display = 'none';
+		rules.innerHTML = 'Show';
+		hide = true;
+	}
+})
 
 
 //makes the computers deck depending on if they are the emp or slave and then shuffles the array;

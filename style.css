@@ -34,14 +34,31 @@ img {
 	display: none;
 }
 
+#introScreen {
+	font-size: 18px;
+}
+
 #endGameText {
 	text-align: center;
+	display: none;
 }
 
 #endGameText p {
 	font-size: 32px;
 }
 
+#rules {
+	background-color: black;
+	color: white;
+	padding: 5px;
+	width: 100px;
+	text-align: center;
+	font-family: 'Maven Pro', 'sans-serif';
+}
+
+#rules:active {
+	background-color: red;
+}
 #cards {
 	max-width: 80%;
 	margin: 0 auto;
