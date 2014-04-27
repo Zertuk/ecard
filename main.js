@@ -13,6 +13,7 @@ var gameText = document.getElementById('gameText');
 var pick1;
 var compDeck;
 var count = 0;
+var compNum = 0;
 
 //decides whether to show the emperor or slave card
 var slaveOrEmperor = function() {
@@ -45,11 +46,8 @@ var whichRound = function() {
 	}
 }	
 
-
 //decides who wins based on which cards are picked, removes citizen cards played, resets hand with makeHand() on w/l
 var whoWins = function() {
-	makeHand();
-	// var pick1 = playerDeck[0];
 	if (pick1 == undefined) {
 		console.log('pick a card');
 	}
@@ -59,8 +57,12 @@ var whoWins = function() {
 		console.log(count);
 	}
 	console.log(pick1);
-	computerPickCard();
+	pick2 = compDeck[compNum];
+
+	console.log(compDeck);
 	console.log(pick2);
+	console.log(compNum);
+	compNum++;
 	var winner;
 	switch (pick1) {
 		case 'emperor': 
@@ -104,16 +106,17 @@ var whoWins = function() {
 				makeHand();
 				break;
 			}
-			else if (pick1 == pick2) {
-				winner = 'tie, play another card';
-				gameText.innerHTML = 'tie, play another card';
+			else if (pick2 == 'slave') {
+				winner = 'you win this round';
+				gameText.innerHTML = 'you win this round';
+				roundNumber++;
+				playerTotal++;
+				makeHand();
 				break;
 			}
-			winner = 'you win this round';
-			gameText.innerHTML = 'you win this round';
-			roundNumber++;
-			playerTotal++;
-			makeHand();
+			
+			winner = 'tie, play another card';
+			gameText.innerHTML = 'tie, play another card';
 			break;			
 		}
 	return winner;
@@ -131,45 +134,38 @@ play.addEventListener('click', function() {
 slaveCard.addEventListener('click', function() {
 	pick1 = 'slave';
 	this.style.border = '3px solid orange';
-	this.style.width = '200px';
+	this.style.width = '175px';
 })
 
 emperorCard.addEventListener('click', function() {
 	pick1 = 'emperor';
 	this.style.border = '3px solid orange';
-	this.style.width = '200px';
+	this.style.width = '175px';
 })
 
 for (var i = 0; i < citizenCards.length; i++) {
 	citizenCards[i].addEventListener('click', function() {
 		pick1 = 'citizen';
 		this.style.border = '3px solid orange';
-		this.style.width = '200px';
+		this.style.width = '175px';
 	})
 }
 
 
-//makes the computers deck depending on if they are the emp or slave
+//makes the computers deck depending on if they are the emp or slave and then shuffles the array;
+
 var computerDeck = function() {
 	compDeck = new Array(5);
 	if (slave == true) {
 		compDeck = ['emperor', 'citizen', 'citizen', 'citizen', 'citizen'];
+		compDeck.sort(function() { return 0.5 - Math.random() });
 		return compDeck;
 	}
 	else {
 		compDeck = ['slave', 'citizen', 'citizen', 'citizen', 'citizen'];
+		compDeck.sort(function() { return 0.5 - Math.random() });
 		return compDeck;
 	}
-}
-
-//chooses computer card and deck based off of slave value
-var computerPickCard = function() {	
-	var pick = Math.round(Math.random()*4);
-	pick2 = compDeck[pick];
-	delete compDeck[pick];
-	console.log(compDeck);
-	console.log(pick2);
-	return pick2;
 }
 
 
@@ -179,28 +175,33 @@ var makeHand = function() {
 	slaveOrEmperor();
 	computerDeck();
 	count = 0;
+	compNum = 0;
  	if (slave == true) {
  		slaveCard.style.display = 'inline';
  		for (var i = 0; i < citizenCards.length; i++) {
  			citizenCards[i].style.display = 'inline';
+ 			
  		}
  	}
  	else {
  		emperorCard.style.display = 'inline';
  		for (var i = 0; i < citizenCards.length; i++) {
  			citizenCards[i].style.display = 'inline';
+ 			
  		}
  	}
  	return;
-	}
-}
+ }
 
 	//displays end of game screen and removes game
 var gameEnd = function() {
 	gameWrapper.style.display = 'none';
 	endGameText.style.display = 'inline';
-}
+	}
 
+makeHand();
+
+};
 
 
 
