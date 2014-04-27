@@ -23,13 +23,16 @@ img {
 
 #slave {
 	display: none;
+	margin-left: 17px;
 }
 
 #emperor {
 	display: none;
+	margin-left: 17px;
 }
 
 #endGameText {
+	display: none;
 	text-align: center;
 }
 
@@ -37,7 +40,13 @@ img {
 	font-size: 32px;
 }
 
+#cards {
+	max-width: 80%;
+	margin: 0 auto;
+}
+
 #gameWrapper {
+	max-width: 100%;
 	margin: 0 auto;
 }
 
