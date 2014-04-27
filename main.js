@@ -132,17 +132,38 @@ slaveCard.addEventListener('click', function() {
 	pick1 = 'slave';
 	this.style.border = '3px solid orange';
 	this.style.width = '175px';
+	emperorCard.style.border = 'none';
+	emperorCard.style.width = '150px';
+	for (var i = 0; i < citizenCards.length; i++) {
+		citizenCards[i].style.border = 'none';	
+		citizenCards[i].style.width = '150px';
+	}
 })
 
 emperorCard.addEventListener('click', function() {
 	pick1 = 'emperor';
 	this.style.border = '3px solid orange';
 	this.style.width = '175px';
+	slaveCard.style.border = 'none';
+	slaveCard.style.width = '150px';	
+	for (var i = 0; i < citizenCards.length; i++) {
+		citizenCards[i].style.border = 'none';	
+		citizenCards[i].style.width = '150px';
+	}
 
 })
 
 for (var i = 0; i < citizenCards.length; i++) {
 	citizenCards[i].addEventListener('click', function() {
+		slaveCard.style.border = 'none';
+		slaveCard.style.width = '150px';
+		emperorCard.style.border = 'none';
+		emperorCard.style.width = '150px';
+		for (var i = 0; i < citizenCards.length; i++) {
+			citizenCards[i].style.border = 'none';	
+			citizenCards[i].style.width = '150px';
+		}
+
 		pick1 = 'citizen';
 		this.style.border = '3px solid orange';
 		this.style.width = '175px';
