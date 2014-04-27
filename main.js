@@ -10,6 +10,7 @@ var play = document.getElementById('play');
 var gameWrapper = document.getElementById('gameWrapper');
 var endGameText = document.getElementById('endGameText');
 var gameText = document.getElementById('gameText');
+var endStats = document.getElementById('endStats');
 var pick1;
 var compDeck;
 var count = 0;
@@ -46,6 +47,7 @@ var whichRound = function() {
 	}
 }	
 
+//wow this function is out of control trash right now
 //decides who wins based on which cards are picked, removes citizen cards played, resets hand with makeHand() on w/l
 var whoWins = function() {
 	if (pick1 == undefined) {
@@ -63,16 +65,16 @@ var whoWins = function() {
 	switch (pick1) {
 		case 'emperor': 
 			if (pick2 == 'slave') {
-				gameText.innerHTML ='computer plays ' + pick2 + ' computer wins this round';
-				winner = 'computer plays ' + pick2 + ', computer wins this round';
-				computerTotal++;
+				gameText.innerHTML ='computer plays ' + pick2 + ' computer wins this round...';
+				computerTotal = computerTotal + 3;
+				endStats.innerHTML = ' You: ' + playerTotal + ' | ' + 'Enemy: ' + computerTotal;
 				roundNumber++;
 				makeHand();
 				break;
 			}
-			winner = 'computer plays ' + pick2 + ' you win this round';
-			gameText.innerHTML = 'computer plays ' + pick2 + ', you win this round';
+			gameText.innerHTML = 'computer plays ' + pick2 + ', you win this round!';
 			playerTotal++;
+			endStats.innerHTML = 'You: ' + playerTotal + ' | ' + 'Enemy: ' + computerTotal;
 			roundNumber++;
 			makeHand();
 			break;
@@ -80,42 +82,40 @@ var whoWins = function() {
 
 		case 'slave': 
 			if (pick2 == 'emperor') {
-				winner = 'computer plays ' + pick2 + ' you win this round';
-				gameText.innerHTML = 'computer plays ' + pick2 + ', you win this round';
-				playerTotal++;
+				gameText.innerHTML = 'computer plays ' + pick2 + ', you win this round!';
+				playerTotal = playerTotal + 3;
 				roundNumber++;
+				endStats.innerHTML = 'You: ' + playerTotal + ' | ' + 'Enemy: ' + computerTotal;
 				makeHand();
 				break;
 			}
-			winner = 'computer plays ' + pick2 + ' computer wins this round';
-			gameText.innerHTML = 'computer plays ' + pick2 + ', computer wins this round';
+			gameText.innerHTML = 'computer plays ' + pick2 + ', computer wins this round...';
 			computerTotal++;
 			roundNumber++;
+			endStats.innerHTML = 'You: ' + playerTotal + ' | ' + 'Enemy: ' + computerTotal;
 			makeHand();
 			break;		
 		case 'citizen':
 			if (pick2 == 'emperor') {
-				winner = 'computer plays ' + pick2 + ', computer wins this round';
-				gameText.innerHTML = 'computer plays ' + pick2 + ', computer wins this round';
+				gameText.innerHTML = 'computer plays ' + pick2 + ', computer wins this round...';
 				computerTotal++;
 				roundNumber++;
+				endStats.innerHTML = 'You: ' + playerTotal + ' | ' + 'Enemy: ' + computerTotal;
 				makeHand();
 				break;
 			}
 			else if (pick2 == 'slave') {
-				winner = 'computer plays ' + pick2 + ', you win this round';
-				gameText.innerHTML = 'computer plays ' + pick2 + ', you win this round';
+				gameText.innerHTML = 'computer plays ' + pick2 + ', you win this round!';
 				roundNumber++;
 				playerTotal++;
+				endStats.innerHTML = 'You: ' + playerTotal + ' | ' + 'Enemy: ' + computerTotal;				
 				makeHand();
 				break;
 			}
-			
-			winner = 'computer plays ' + pick2 + ', tie, play another card';
-			gameText.innerHTML = 'computer plays ' + pick2 + ', tie, play another card';
+			gameText.innerHTML = 'computer plays ' + pick2 + ', tie, play another card...';
 			break;			
 		}
-	return winner;
+	return;
 }
 
 //event listeners for play button, and picking the cards
@@ -126,20 +126,17 @@ play.addEventListener('click', function() {
 slaveCard.addEventListener('click', function() {
 	pick1 = 'slave';
 	this.style.border = '3px solid orange';
-	this.style.width = '175px';
 })
 
 emperorCard.addEventListener('click', function() {
 	pick1 = 'emperor';
 	this.style.border = '3px solid orange';
-	this.style.width = '175px';
 })
 
 for (var i = 0; i < citizenCards.length; i++) {
 	citizenCards[i].addEventListener('click', function() {
 		pick1 = 'citizen';
 		this.style.border = '3px solid orange';
-		this.style.width = '175px';
 	})
 }
 
@@ -193,6 +190,7 @@ var gameEnd = function() {
 
 
 //first round init
+endStats.innerHTML = ' You: ' + playerTotal + ' | ' + 'Enemy: ' + computerTotal;
 slaveOrEmperor();
 whichRound();
 makeHand();
