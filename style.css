@@ -16,6 +16,11 @@ body {
 	background-color: red;
 }
 
+.wrapper {
+	text-align: center;
+	margin-bottom: 25px;
+}
+
 #endStats {
 	font-size: 26px;
 	color: red;
@@ -38,13 +43,19 @@ img {
 	font-size: 18px;
 }
 
+#gameText {
+	font-size: 22px;
+}
 #endGameText {
-	text-align: center;
 	display: none;
+	font-size: 50px;
+	font-family: 'Maven Pro', 'sans-serif';
+	
 }
 
 #endGameText p {
-	font-size: 32px;
+	text-align: center;
+	margin-top: 50px;
 }
 
 #rules {
@@ -68,6 +79,7 @@ img {
 	text-align: center;
 	max-width: 100%;
 	margin: 0 auto;
+	margin-bottom: 15%;
 }
 
 p {
