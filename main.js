@@ -188,7 +188,7 @@ for (var i = 0; i < citizenCards.length; i++) {
 
 rules.addEventListener('click', function() {
 	if (hide == true) {
-		intro.style.display = 'inline';
+		intro.style.display = 'block';
 		rules.innerHTML = 'Hide';
 		hide = false;
 	}
