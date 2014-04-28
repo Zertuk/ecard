@@ -14,6 +14,16 @@ var gameText = document.getElementById('gameText');
 var endStats = document.getElementById('endStats');
 var rules = document.getElementById('rules');
 var intro = document.getElementById('introScreen');
+var zawa = document.createElement('audio');
+zawa.src = 'sound/zawa.mp3';
+var draw = document.createElement('audio');
+draw.src = 'sound/draw.wav';
+var shuffle = document.createElement('audio');
+shuffle.src = 'sound/shuffle.wav';
+var cheer = document.createElement('audio');
+cheer.src = 'sound/cheer.mp3';
+var lose = document.createElement('audio');
+lose.src = 'sound/pain.mp3';
 var pick1;
 var compDeck;
 var count = 0;
@@ -55,14 +65,15 @@ var whichRound = function() {
 //decides who wins based on which cards are picked, removes citizen cards played, resets hand with makeHand() on w/l
 var whoWins = function() {
 	if (pick1 == undefined) {
-		console.log('pick a card');
+		gameText.innerHTML = 'Pick a card by clicking it!';
+		compNum--;
 	}
 	if (pick1 == 'citizen') {
 		citizenCards[count].style.display = 'none';
 		count++;
 		console.log(count);
 	}
-	console.log(pick1);
+	draw.play();
 	pick2 = compDeck[compNum];
 	compNum++;
 	var winner;
@@ -71,6 +82,7 @@ var whoWins = function() {
 			if (pick2 == 'slave') {
 				gameText.innerHTML ='computer plays ' + pick2 + ' computer wins this round...';
 				computerTotal = computerTotal + 3;
+				zawa.play();
 				endStats.innerHTML = ' You: ' + playerTotal + ' | ' + 'Enemy: ' + computerTotal;
 				roundNumber++;
 				makeHand();
@@ -96,6 +108,7 @@ var whoWins = function() {
 			gameText.innerHTML = 'computer plays ' + pick2 + ', computer wins this round...';
 			computerTotal++;
 			roundNumber++;
+			zawa.play();
 			endStats.innerHTML = 'You: ' + playerTotal + ' | ' + 'Enemy: ' + computerTotal;
 			makeHand();
 			break;		
@@ -104,6 +117,7 @@ var whoWins = function() {
 				gameText.innerHTML = 'computer plays ' + pick2 + ', computer wins this round...';
 				computerTotal++;
 				roundNumber++;
+				zawa.play();
 				endStats.innerHTML = 'You: ' + playerTotal + ' | ' + 'Enemy: ' + computerTotal;
 				makeHand();
 				break;
@@ -117,8 +131,10 @@ var whoWins = function() {
 				break;
 			}
 			gameText.innerHTML = 'computer plays ' + pick2 + ', tie, play another card...';
+			zawa.play();
 			break;			
 		}
+	pick1 = null;
 	resetStyles();
 	return;
 }
@@ -215,12 +231,12 @@ var computerDeck = function() {
 
 //makes hand with 4 citizens and either slave or emperor depending on the boolean value of slave
 var makeHand = function() {
+	shuffle.play();
 	whichRound();
 	slaveOrEmperor();
 	computerDeck();
 	count = 0;
 	compNum = 0;
-	pick1 = null;
  	if (slave == true) {
  		slaveCard.style.display = 'inline';
  		for (var i = 0; i < citizenCards.length; i++) {
@@ -242,13 +258,20 @@ var makeHand = function() {
 var gameEnd = function() {
 	endGameText.style.display = 'inline';
 	gameWrapper.style.display = 'none';
-	if (playerTotal > computerTotal) {
-		endGameText.innerHTML = 'The enemy wins with a score of ' + computerTotal;
+	if (playerTotal < computerTotal) {
+		endGameText.innerHTML = 'The enemy wins with a score of ' + computerTotal + '...';
+		lose.play();
+	}
+	else if (playerTotal == computerTotal) {
+		endGameText.innerHTML = 'you tie with ' + playerTotal + '...';
+		zawa.play();
+
 	}
 	else {
-		endGameText.innerHTML = 'You win with a score of ' + playerTotal;
+		endGameText.innerHTML = 'You win with a score of ' + playerTotal + '!';
+		cheer.play();
 	}
-	}
+}
 
 
 //first round init
